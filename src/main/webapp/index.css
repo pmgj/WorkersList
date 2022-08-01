@@ -1,0 +1,39 @@
+body {
+    color: #7F7F7F;
+    font: 1em/1.6em "Trebuchet MS", Verdana, sans-serif;
+}
+#lista {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 600px;
+}
+#lista tr:nth-child(odd) {
+    background-color: #F7F7F7;
+    color: #666
+}
+#lista tr {
+    height: 45px;
+}
+#lista td:first-child {
+    text-align: center;
+}
+#lista tbody tr:hover {
+    background-color: #EEE;
+    color: #333
+}
+#lista caption, #lista thead th {
+    background-color: #E63C1E;
+    color: #FFF;
+    font-weight: 700;
+    text-transform: uppercase
+}
+#lista th[colspan] {
+    background-color: #EEE;
+    color: black;
+}
+#form {
+    display: none;
+}
+/*#lista {
+    display: none;
+}*/

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastro de funcionários</title>
+    <link rel="icon" type="image/icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="form.css" />
+    <script src="indexFetch.js" defer="defer"></script>
+</head>
+
+<body>
+    <table id="lista">
+        <caption>Cadastro de funcionários</caption>
+        <thead>
+            <tr>
+                <th><input type="button" value="+" id="inserir" /></th>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Salário</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <form id="form" class="form-style-7">
+        <input type="hidden" name="codigo" value="" />
+        <h1>Informe seus dados</h1>
+        <ul>
+            <li>
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" />
+                <span>Informe seu nome</span>
+            </li>
+            <li>
+                <label for="data">Data de Nascimento:</label>
+                <input type="date" name="dataNascimento" id="data" />
+                <span>Informe sua data de nascimento</span>
+            </li>
+            <li>
+                <label for="salario">Salário:</label>
+                <input type="number" name="salario" id="salario" />
+                <span>Informe seu salário</span>
+            </li>
+            <li>
+                <input type="submit" value="Inserir" name="submeter" />
+            </li>
+        </ul>
+    </form>
+</body>
+
+</html>
