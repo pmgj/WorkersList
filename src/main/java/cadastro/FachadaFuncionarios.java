@@ -2,7 +2,7 @@ package cadastro;
 
 import java.util.Collection;
 
-import basicas.Funcionario;
+import basicas.Worker;
 import repositorio.RepositorioFuncionariosCollection;
 
 public class FachadaFuncionarios {
@@ -22,23 +22,23 @@ public class FachadaFuncionarios {
         return FACHADA;
     }
 
-    public void inserir(Funcionario func) {
+    public void inserir(Worker func) {
         repositorio.inserir(func);
     }
 
-    public void remover(Funcionario func) {
+    public void remover(Worker func) {
         repositorio.remover(func);
     }
 
-    public void alterar(Funcionario func) {
+    public void alterar(Worker func) {
         repositorio.alterar(func);
     }
 
-    public Funcionario procurarPorCodigo(int codigo) {
+    public Worker procurarPorCodigo(int codigo) {
         return repositorio.procurarPorCodigo(codigo);
     }
 
-    public Collection<Funcionario> listarTodos() {
+    public Collection<Worker> listarTodos() {
         return repositorio.listarTodos();
     }
 }

@@ -2,38 +2,40 @@ body {
     color: #7F7F7F;
     font: 1em/1.6em "Trebuchet MS", Verdana, sans-serif;
 }
-#lista {
+
+#list {
     margin: 0 auto;
     border-collapse: collapse;
     width: 600px;
 }
-#lista tr:nth-child(odd) {
+
+#list tr:nth-child(odd) {
     background-color: #F7F7F7;
     color: #666
 }
-#lista tr {
+
+#list tr {
     height: 45px;
 }
-#lista td:first-child {
+
+#list td:first-child {
     text-align: center;
 }
-#lista tbody tr:hover {
+
+#list tbody tr:hover {
     background-color: #EEE;
     color: #333
 }
-#lista caption, #lista thead th {
+
+#list caption,
+#list thead th {
     background-color: #E63C1E;
     color: #FFF;
-    font-weight: 700;
-    text-transform: uppercase
+    font-weight: bold;
+    text-transform: uppercase;
 }
-#lista th[colspan] {
+
+#list th[colspan] {
     background-color: #EEE;
     color: black;
 }
-#form {
-    display: none;
-}
-/*#lista {
-    display: none;
-}*/

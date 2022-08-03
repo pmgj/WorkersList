@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import basicas.Funcionario;
+import basicas.Worker;
 import cadastro.FachadaFuncionarios;
 
 @WebServlet(name = "ServletFuncionario", urlPatterns = {"/funcionario"})
@@ -28,7 +28,7 @@ public class ServletFuncionario extends HttpServlet {
         String id = request.getParameter("codigo");
         if (id != null) {
             int codigo = Integer.parseInt(id);
-            Funcionario f = fachada.procurarPorCodigo(codigo);
+            Worker f = fachada.procurarPorCodigo(codigo);
             String json = JsonbBuilder.create().toJson(f);
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(json);
@@ -42,7 +42,7 @@ public class ServletFuncionario extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String requestData = request.getReader().lines().collect(Collectors.joining());
-        Funcionario func = JsonbBuilder.create().fromJson(requestData, Funcionario.class);
+        Worker func = JsonbBuilder.create().fromJson(requestData, Worker.class);
         fachada.inserir(func);
         listAll(response);
     }
@@ -52,7 +52,7 @@ public class ServletFuncionario extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("codigo");
         int codigo = Integer.parseInt(id);
-        Funcionario func = fachada.procurarPorCodigo(codigo);
+        Worker func = fachada.procurarPorCodigo(codigo);
         fachada.remover(func);
         request.setAttribute("doDelete", "true");
         listAll(response);
@@ -63,7 +63,7 @@ public class ServletFuncionario extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String requestData = request.getReader().lines().collect(Collectors.joining());
-        Funcionario func = JsonbBuilder.create().fromJson(requestData, Funcionario.class);
+        Worker func = JsonbBuilder.create().fromJson(requestData, Worker.class);
         fachada.alterar(func);
         listAll(response);
     }

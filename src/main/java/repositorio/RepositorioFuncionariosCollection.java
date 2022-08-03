@@ -3,34 +3,34 @@ package repositorio;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import basicas.Funcionario;
+import basicas.Worker;
 
 public class RepositorioFuncionariosCollection {
 
-    private final Collection<Funcionario> repositorio = new ArrayList<>();
+    private final Collection<Worker> repositorio = new ArrayList<>();
     private static int id = 0;
 
-    public void inserir(Funcionario func) {
-        func.setCodigo(id++);
+    public void inserir(Worker func) {
+        func.setId(id++);
         repositorio.add(func);
     }
 
-    public void remover(Funcionario func) {
+    public void remover(Worker func) {
         repositorio.remove(func);
     }
 
-    public void alterar(Funcionario func) {
-        Funcionario f = this.procurarPorCodigo(func.getCodigo());
-        f.setNome(func.getNome());
-        f.setSalario(func.getSalario());
-        f.setDataNascimento(func.getDataNascimento());
+    public void alterar(Worker func) {
+        Worker f = this.procurarPorCodigo(func.getId());
+        f.setName(func.getName());
+        f.setSalary(func.getSalary());
+        f.setBirthDate(func.getBirthDate());
     }
 
-    public Funcionario procurarPorCodigo(int codigo) {
-        return repositorio.stream().filter(func -> func.getCodigo() == codigo).findFirst().orElse(null);
+    public Worker procurarPorCodigo(int codigo) {
+        return repositorio.stream().filter(func -> func.getId() == codigo).findFirst().orElse(null);
     }
 
-    public Collection<Funcionario> listarTodos() {
+    public Collection<Worker> listarTodos() {
         return repositorio;
     }
 }
