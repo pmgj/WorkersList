@@ -4,20 +4,20 @@ class GUI {
     }
     insertWorker(worker) {
         let myInit = { method: 'post', body: JSON.stringify(worker) };
-        window.fetch("funcionario", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        window.fetch("worker", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     updateWorker(worker) {
         let myInit = { method: 'put', body: JSON.stringify(worker) };
-        window.fetch("funcionario", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        window.fetch("worker", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     removeWorker(id) {
-        window.fetch(`funcionario?codigo=${id}`, { method: 'delete' }).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        window.fetch(`worker?id=${id}`, { method: 'delete' }).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     listWorkers() {
-        window.fetch("funcionario").then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        window.fetch("worker").then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     getWorker(id, func) {
-        window.fetch(`funcionario?codigo=${id}`).then(resolve => resolve.json()).then(resolve => func(resolve)).catch(error => console.log(error));
+        window.fetch(`worker?id=${id}`).then(resolve => resolve.json()).then(resolve => func(resolve)).catch(error => console.log(error));
     }
     saveWorker(evt) {
         let elem = evt.target;
@@ -141,7 +141,7 @@ class GUI {
         this.enableAddWorker(false);
     }
     sort(evt) {
-        window.fetch("funcionario").then(resolve => resolve.json()).then(list => {
+        window.fetch("worker").then(resolve => resolve.json()).then(list => {
             let sortByName = {
                 f1: (a, b) => a["name"] > b["name"] ? 1 : a["name"] < b["name"] ? -1 : 0,
                 f2: (a, b) => a["name"] < b["name"] ? 1 : a["name"] > b["name"] ? -1 : 0

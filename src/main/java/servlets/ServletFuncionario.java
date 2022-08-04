@@ -9,12 +9,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import basicas.Worker;
-import cadastro.FachadaFuncionarios;
+import cadastro.WorkersFacade;
 
-@WebServlet(name = "ServletFuncionario", urlPatterns = {"/funcionario"})
+@WebServlet(name = "ServletFuncionario", urlPatterns = {"/worker"})
 public class ServletFuncionario extends HttpServlet {
 
-    private final FachadaFuncionarios fachada = FachadaFuncionarios.getInstance();
+    private final WorkersFacade fachada = WorkersFacade.getInstance();
 
     private void listAll(HttpServletResponse response) throws IOException {
         String json = JsonbBuilder.create().toJson(fachada.listarTodos());
@@ -25,10 +25,10 @@ public class ServletFuncionario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("codigo");
-        if (id != null) {
-            int codigo = Integer.parseInt(id);
-            Worker f = fachada.procurarPorCodigo(codigo);
+        String code = request.getParameter("id");
+        if (code != null) {
+            int id = Integer.parseInt(code);
+            Worker f = fachada.procurarPorCodigo(id);
             String json = JsonbBuilder.create().toJson(f);
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(json);
@@ -50,11 +50,10 @@ public class ServletFuncionario extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("codigo");
+        String id = request.getParameter("id");
         int codigo = Integer.parseInt(id);
         Worker func = fachada.procurarPorCodigo(codigo);
         fachada.remover(func);
-        request.setAttribute("doDelete", "true");
         listAll(response);
     }
 

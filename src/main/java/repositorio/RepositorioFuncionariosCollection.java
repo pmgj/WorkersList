@@ -7,30 +7,30 @@ import basicas.Worker;
 
 public class RepositorioFuncionariosCollection {
 
-    private final Collection<Worker> repositorio = new ArrayList<>();
+    private final Collection<Worker> repository = new ArrayList<>();
     private static int id = 0;
 
-    public void inserir(Worker func) {
-        func.setId(id++);
-        repositorio.add(func);
+    public void insert(Worker w) {
+        w.setId(id++);
+        repository.add(w);
     }
 
-    public void remover(Worker func) {
-        repositorio.remove(func);
+    public void remove(Worker w) {
+        repository.remove(w);
     }
 
-    public void alterar(Worker func) {
-        Worker f = this.procurarPorCodigo(func.getId());
-        f.setName(func.getName());
-        f.setSalary(func.getSalary());
-        f.setBirthDate(func.getBirthDate());
+    public void update(Worker w) {
+        Worker f = this.searchById(w.getId());
+        f.setName(w.getName());
+        f.setSalary(w.getSalary());
+        f.setBirthDate(w.getBirthDate());
     }
 
-    public Worker procurarPorCodigo(int codigo) {
-        return repositorio.stream().filter(func -> func.getId() == codigo).findFirst().orElse(null);
+    public Worker searchById(int id) {
+        return repository.stream().filter(func -> func.getId() == id).findFirst().orElse(null);
     }
 
-    public Collection<Worker> listarTodos() {
-        return repositorio;
+    public Collection<Worker> listAll() {
+        return repository;
     }
 }
