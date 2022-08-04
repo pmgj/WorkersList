@@ -52,4 +52,9 @@ public class Worker {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return String.format("(%d, %s, %f, %s)", id, name, salary, birthDate);
+    }
 }

@@ -1,58 +1,33 @@
 class GUI {
     constructor() {
-        this.sortingOrder = true;    
+        this.sortingOrder = true;
     }
     insertWorker(worker) {
-        let myInit = {method: 'post', body: JSON.stringify(worker)};
+        let myInit = { method: 'post', body: JSON.stringify(worker) };
         window.fetch("funcionario", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
-        // let transaction = this.db.transaction(this.STORE_NAME, "readwrite");
-        // let store = transaction.objectStore(this.STORE_NAME);
-        // let request = store.add(worker);
-        // request.onsuccess = this.listWorkers.bind(this);
-        // request.onerror = this.requestError;
     }
     updateWorker(worker) {
-        let myInit = {method: 'put', body: JSON.stringify(worker)};
+        let myInit = { method: 'put', body: JSON.stringify(worker) };
         window.fetch("funcionario", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
-        // let transaction = this.db.transaction(this.STORE_NAME, "readwrite");
-        // let store = transaction.objectStore(this.STORE_NAME);
-        // let request = store.put(worker);
-        // request.onsuccess = this.listWorkers.bind(this);
-        // request.onerror = this.requestError;
     }
     removeWorker(id) {
-        window.fetch(`funcionario?codigo=${id}`, {method: 'delete'}).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
-        // let transaction = this.db.transaction(this.STORE_NAME, "readwrite");
-        // let store = transaction.objectStore(this.STORE_NAME);
-        // let request = store.delete(id);
-        // request.onsuccess = this.listWorkers.bind(this);
-        // request.onerror = this.requestError;
+        window.fetch(`funcionario?codigo=${id}`, { method: 'delete' }).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     listWorkers() {
         window.fetch("funcionario").then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
-        // let transaction = this.db.transaction(this.STORE_NAME, "readonly");
-        // let store = transaction.objectStore(this.STORE_NAME);
-        // let request = store.getAll();
-        // request.onsuccess = e => this.showWorkers(e.target.result);
-        // request.onerror = this.requestError;
     }
     getWorker(id, func) {
-        window.fetch(`funcionario?codigo=${id}`, {method: 'delete'}).then(resolve => resolve.json()).then(resolve => func(resolve)).catch(error => console.log(error));
-        // let transaction = this.db.transaction(this.STORE_NAME, "readonly");
-        // let store = transaction.objectStore(this.STORE_NAME);
-        // let request = store.get(id);
-        // request.onsuccess = e => func(e.target.result);
-        // request.onerror = this.requestError;
+        window.fetch(`funcionario?codigo=${id}`).then(resolve => resolve.json()).then(resolve => func(resolve)).catch(error => console.log(error));
     }
     saveWorker(evt) {
         let elem = evt.target;
         let tr = elem.parentNode.parentNode;
-        let code = elem.dataset.id;
+        let id = elem.dataset.id;
         let name = tr.querySelector("td:nth-child(2) input").value;
         let date = tr.querySelector("td:nth-child(3) input").value;
         let salary = tr.querySelector("td:nth-child(4) input").value;
         try {
-            let object = { code: parseInt(code), name: this.validateName(name), salary: this.validateSalary(salary), birthDate: this.validateDate(date) };
+            let object = { id: parseInt(id), name: this.validateName(name), salary: this.validateSalary(salary), birthDate: this.validateDate(date) };
             this.updateWorker(object);
             this.enableAddWorker(true);
         } catch (ex) {
@@ -71,7 +46,7 @@ class GUI {
             let td2 = td1.nextSibling;
             td2.innerHTML = `<input type="text" name="name" value="${func.name}" />`;
             let td3 = td2.nextSibling;
-            td3.innerHTML = `<input type="date" name="birthDate" value="${func.birthDate.toISOString().split('T')[0]}" />`;
+            td3.innerHTML = `<input type="date" name="birthDate" value="${new Date(func.birthDate).toISOString().split('T')[0]}" />`;
             let td4 = td3.nextSibling;
             td4.innerHTML = `<input type="number" name="salary" value="${func.salary}" />`;
         });
@@ -144,9 +119,9 @@ class GUI {
             let dateFormatter = new Intl.DateTimeFormat('pt-br');
             for (let func of lista) {
                 let linha = "<td>";
-                linha += `<input type="button" title="Edit" value="#" data-id="${func.code}" />`;
-                linha += `<input type="button" title="Remove" value="-" data-id="${func.code}" />`;
-                linha += `</td><td>${func.name}</td><td>${dateFormatter.format(func.birthDate)}</td><td>${numberFormatter.format(func.salary)}</td>`;
+                linha += `<input type="button" title="Edit" value="#" data-id="${func.id}" />`;
+                linha += `<input type="button" title="Remove" value="-" data-id="${func.id}" />`;
+                linha += `</td><td>${func.name}</td><td>${dateFormatter.format(new Date(func.birthDate))}</td><td>${numberFormatter.format(func.salary)}</td>`;
                 let newChild = document.createElement("tr");
                 tbody.appendChild(newChild);
                 newChild.innerHTML = linha;
@@ -166,18 +141,14 @@ class GUI {
         this.enableAddWorker(false);
     }
     sort(evt) {
-        let transaction = this.db.transaction(this.STORE_NAME, "readonly");
-        let store = transaction.objectStore(this.STORE_NAME);
-        let request = store.getAll();
-        request.onsuccess = e => {
-            let list = e.target.result;
+        window.fetch("funcionario").then(resolve => resolve.json()).then(list => {
             let sortByName = {
                 f1: (a, b) => a["name"] > b["name"] ? 1 : a["name"] < b["name"] ? -1 : 0,
                 f2: (a, b) => a["name"] < b["name"] ? 1 : a["name"] > b["name"] ? -1 : 0
             };
             let sortByDate = {
-                f1: (a, b) => a["birthDate"] - b["birthDate"],
-                f2: (a, b) => b["birthDate"] - a["birthDate"]
+                f1: (a, b) => new Date(a["birthDate"]) - new Date(b["birthDate"]),
+                f2: (a, b) => new Date(b["birthDate"]) - new Date(a["birthDate"])
             };
             let sortBySalary = {
                 f1: (a, b) => a["salary"] - b["salary"],
@@ -187,9 +158,8 @@ class GUI {
             let field = functions[evt.target.cellIndex];
             let sf = this.sortingOrder ? field.f1 : field.f2;
             list.sort(sf);
-            this.showWorkers(list);
-        };
-        request.onerror = this.requestError;
+            this.showWorkers(list);    
+        }).catch(error => console.log(error));
         this.sortingOrder = !this.sortingOrder;
     }
     enableAddWorker(enable) {
