@@ -3,39 +3,39 @@ body {
     font: 1em/1.6em "Trebuchet MS", Verdana, sans-serif;
 }
 
-#list {
+table {
     margin: 0 auto;
     border-collapse: collapse;
     width: 600px;
 }
 
-#list tr:nth-child(odd) {
+table tr:nth-child(odd) {
     background-color: #F7F7F7;
     color: #666
 }
 
-#list tr {
+table tr {
     height: 45px;
 }
 
-#list td:first-child {
+table td:first-child {
     text-align: center;
 }
 
-#list tbody tr:hover {
+table tbody tr:hover {
     background-color: #EEE;
     color: #333
 }
 
-#list caption,
-#list thead th {
+table caption,
+table thead th {
     background-color: #E63C1E;
     color: #FFF;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-#list th[colspan] {
+table th[colspan] {
     background-color: #EEE;
     color: black;
 }

@@ -108,16 +108,16 @@ class GUI {
         let save = document.querySelectorAll("input[type='button'][title='Store']");
         save.forEach(a => a.onclick = this.addWorker.bind(this));
     }
-    showWorkers(lista) {
-        let tbody = document.querySelector("table#list tbody");
+    showWorkers(list) {
+        let tbody = document.querySelector("table tbody");
         tbody.innerHTML = "";
-        if (lista.length > 0) {
+        if (list.length > 0) {
             let numberFormatter = new Intl.NumberFormat('pt-br', {
                 style: 'currency',
                 currency: 'BRL'
             });
             let dateFormatter = new Intl.DateTimeFormat('pt-br');
-            for (let func of lista) {
+            for (let func of list) {
                 let linha = "<td>";
                 linha += `<input type="button" title="Edit" value="#" data-id="${func.id}" />&nbsp;`;
                 linha += `<input type="button" title="Remove" value="&ndash;" data-id="${func.id}" />`;
@@ -133,7 +133,7 @@ class GUI {
         this.enableAddWorker(true);
     }
     showAddWorker() {
-        let tbody = document.querySelector("table#list tbody");
+        let tbody = document.querySelector("table tbody");
         let row = `<tr><td><input type="button" title="Store" value="S" /></td><td><input type="text" name="name" /></td><td><input type="date" name="birthDate" /></td><td><input type="number" name="salary" /></td></tr>`;
         let th = tbody.querySelector("th[colspan]");
         tbody.innerHTML = th ? row : row + tbody.innerHTML;
