@@ -6,7 +6,7 @@ class GUI {
     }
     databaseUpgrade(e) {
         let stores = e.target.result;
-        stores.createObjectStore(STORE_NAME, { keyPath: 'code', autoIncrement: true });
+        stores.createObjectStore(this.STORE_NAME, { keyPath: 'code', autoIncrement: true });
     }
     requestError(e) {
         console.error("Error", e.target.error);
@@ -68,7 +68,7 @@ class GUI {
             elem.onclick = this.saveWorker.bind(this);
             elem.title = "Store";
             elem.value = "S";
-            elem.nextSibling.style.display = "none";
+            elem.nextElementSibling.style.display = "none";
             let td1 = elem.parentNode;
             let td2 = td1.nextSibling;
             td2.innerHTML = `<input type="text" name="name" value="${func.name}" />`;
@@ -146,8 +146,8 @@ class GUI {
             let dateFormatter = new Intl.DateTimeFormat('pt-br');
             for (let func of lista) {
                 let linha = "<td>";
-                linha += `<input type="button" title="Edit" value="#" data-id="${func.code}" />`;
-                linha += `<input type="button" title="Remove" value="-" data-id="${func.code}" />`;
+                linha += `<input type="button" title="Edit" value="#" data-id="${func.code}" />&nbsp;`;
+                linha += `<input type="button" title="Remove" value="&ndash;" data-id="${func.code}" />`;
                 linha += `</td><td>${func.name}</td><td>${dateFormatter.format(func.birthDate)}</td><td>${numberFormatter.format(func.salary)}</td>`;
                 let newChild = document.createElement("tr");
                 tbody.appendChild(newChild);
@@ -200,7 +200,7 @@ class GUI {
     }
     addEvents() {
         let openRequest = window.indexedDB.open(this.STORE_NAME, 1);
-        openRequest.onupgradeneeded = this.databaseUpgrade;
+        openRequest.onupgradeneeded = this.databaseUpgrade.bind(this);
         openRequest.onerror = this.requestError;
         openRequest.onsuccess = e => {
             this.db = e.target.result;
