@@ -7,11 +7,11 @@ import model.Worker;
 
 public class WorkersFacade {
 
-    private static final WorkersFacade FACHADA;
+    private static final WorkersFacade FACADE;
     private final RepositoryWorkersCollection repository;
 
     static {
-        FACHADA = new WorkersFacade();
+        FACADE = new WorkersFacade();
     }
 
     private WorkersFacade() {
@@ -19,26 +19,26 @@ public class WorkersFacade {
     }
 
     public static WorkersFacade getInstance() {
-        return FACHADA;
+        return FACADE;
     }
 
-    public void inserir(Worker func) {
-        repository.insert(func);
+    public void insert(Worker worker) {
+        repository.insert(worker);
     }
 
-    public void remover(Worker func) {
-        repository.remove(func);
+    public void remove(Worker worker) {
+        repository.remove(worker);
     }
 
-    public void alterar(Worker func) {
-        repository.update(func);
+    public void update(Worker worker) {
+        repository.update(worker);
     }
 
-    public Worker procurarPorCodigo(int codigo) {
-        return repository.searchById(codigo);
+    public Worker searchById(int id) {
+        return repository.searchById(id);
     }
 
-    public Collection<Worker> listarTodos() {
+    public Collection<Worker> listAll() {
         return repository.listAll();
     }
 }

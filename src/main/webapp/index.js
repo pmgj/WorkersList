@@ -3,21 +3,21 @@ class GUI {
         this.sortingOrder = true;
     }
     insertWorker(worker) {
-        let myInit = { method: 'post', body: JSON.stringify(worker) };
-        window.fetch("worker", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        let myInit = { method: 'post', body: JSON.stringify(worker), headers: new Headers({ "Content-Type": "application/json" }) };
+        window.fetch("webresources/worker", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     updateWorker(worker) {
-        let myInit = { method: 'put', body: JSON.stringify(worker) };
-        window.fetch("worker", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        let myInit = { method: 'put', body: JSON.stringify(worker), headers: new Headers({ "Content-Type": "application/json" }) };
+        window.fetch("webresources/worker", myInit).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     removeWorker(id) {
-        window.fetch(`worker?id=${id}`, { method: 'delete' }).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        window.fetch(`webresources/worker/${id}`, { method: 'delete' }).then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     listWorkers() {
-        window.fetch("worker").then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
+        window.fetch("webresources/worker").then(resolve => resolve.json()).then(resolve => this.showWorkers(resolve)).catch(error => console.log(error));
     }
     getWorker(id, func) {
-        window.fetch(`worker?id=${id}`).then(resolve => resolve.json()).then(resolve => func(resolve)).catch(error => console.log(error));
+        window.fetch(`webresources/worker/${id}`).then(resolve => resolve.json()).then(resolve => func(resolve)).catch(error => console.log(error));
     }
     saveWorker(evt) {
         let elem = evt.target;
@@ -158,7 +158,7 @@ class GUI {
             let field = functions[evt.target.cellIndex];
             let sf = this.sortingOrder ? field.f1 : field.f2;
             list.sort(sf);
-            this.showWorkers(list);    
+            this.showWorkers(list);
         }).catch(error => console.log(error));
         this.sortingOrder = !this.sortingOrder;
     }
