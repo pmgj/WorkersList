@@ -41,7 +41,7 @@ class GUI {
             elem.onclick = this.saveWorker.bind(this);
             elem.title = "Store";
             elem.value = "S";
-            elem.nextSibling.style.display = "none";
+            elem.nextElementSibling.style.display = "none";
             let td1 = elem.parentNode;
             let td2 = td1.nextSibling;
             td2.innerHTML = `<input type="text" name="name" value="${func.name}" />`;
@@ -119,8 +119,8 @@ class GUI {
             let dateFormatter = new Intl.DateTimeFormat('pt-br');
             for (let func of lista) {
                 let linha = "<td>";
-                linha += `<input type="button" title="Edit" value="#" data-id="${func.id}" />`;
-                linha += `<input type="button" title="Remove" value="-" data-id="${func.id}" />`;
+                linha += `<input type="button" title="Edit" value="#" data-id="${func.id}" />&nbsp;`;
+                linha += `<input type="button" title="Remove" value="&ndash;" data-id="${func.id}" />`;
                 linha += `</td><td>${func.name}</td><td>${dateFormatter.format(new Date(func.birthDate))}</td><td>${numberFormatter.format(func.salary)}</td>`;
                 let newChild = document.createElement("tr");
                 tbody.appendChild(newChild);

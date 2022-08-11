@@ -1,4 +1,4 @@
-package servlets;
+package controller;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -8,11 +8,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import basicas.Worker;
-import cadastro.WorkersFacade;
+import model.Worker;
 
-@WebServlet(name = "ServletFuncionario", urlPatterns = {"/worker"})
-public class ServletFuncionario extends HttpServlet {
+@WebServlet(name = "ServletWorkers", urlPatterns = {"/worker"})
+public class ServletWorkers extends HttpServlet {
 
     private final WorkersFacade fachada = WorkersFacade.getInstance();
 

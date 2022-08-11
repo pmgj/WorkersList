@@ -1,11 +1,9 @@
-package repositorio;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import basicas.Worker;
-
-public class RepositorioFuncionariosCollection {
+public class RepositoryWorkersCollection {
 
     private final Collection<Worker> repository = new ArrayList<>();
     private static int id = 0;

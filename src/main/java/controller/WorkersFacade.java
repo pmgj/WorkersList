@@ -1,21 +1,21 @@
-package cadastro;
+package controller;
 
 import java.util.Collection;
 
-import basicas.Worker;
-import repositorio.RepositorioFuncionariosCollection;
+import model.RepositoryWorkersCollection;
+import model.Worker;
 
 public class WorkersFacade {
 
     private static final WorkersFacade FACHADA;
-    private final RepositorioFuncionariosCollection repository;
+    private final RepositoryWorkersCollection repository;
 
     static {
         FACHADA = new WorkersFacade();
     }
 
     private WorkersFacade() {
-        repository = new RepositorioFuncionariosCollection();
+        repository = new RepositoryWorkersCollection();
     }
 
     public static WorkersFacade getInstance() {

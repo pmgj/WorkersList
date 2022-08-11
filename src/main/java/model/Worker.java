@@ -1,4 +1,4 @@
-package basicas;
+package model;
 
 public class Worker {
 
