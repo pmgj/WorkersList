@@ -39,3 +39,16 @@ body {
     background-color: #EEE;
     color: black;
 }
+
+@media (max-width: 500px) {
+    body {
+        font-size: small;
+    }
+
+    #list {
+        width: 100%;
+    }
+    #list td:not(:first-child) input {
+        width: 5rem;
+    }
+}
