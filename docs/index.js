@@ -85,7 +85,7 @@ class GUI {
         let tr = evt.target.parentNode.parentNode;
         let name = tr.querySelector("td:nth-child(2) input").value;
         let date = tr.querySelector("td:nth-child(3) input").value;
-        let salary = tr.querySelector("td:nth-child(4) input").value;
+        let salary = tr.querySelector("td:nth-child(4) input").valueAsNumber;
         try {
             let object = { name: this.validateName(name), salary: this.validateSalary(salary), birthDate: this.validateDate(date) };
             this.insertWorker(object);
@@ -117,8 +117,7 @@ class GUI {
         }
         return temp;
     }
-    validateSalary(value) {
-        let temp = parseFloat(value);
+    validateSalary(temp) {
         if (isNaN(temp)) {
             throw new Error("Salary must be a number.");
         }
