@@ -19,14 +19,15 @@ public class WorkersServlet extends HttpServlet {
         String option = req.getParameter("option");
         String destination;
         switch (option) {
-            case "0":
+            case "0" -> {
                 destination = "simple.jsp";
-                break;
-            case "1":
+            }
+            case "1" -> {
                 destination = "classic.jsp";
-                break;
-            default:
+            }
+            default -> {
                 destination = "tag.jsp";
+            }
         }
         req.getRequestDispatcher("jsp/" + destination).forward(req, resp);
     }
