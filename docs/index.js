@@ -2,7 +2,7 @@ class GUI {
     constructor() {
         this.db = null;
         this.STORE_NAME = "workers";
-        this.sortingOrder = true;    
+        this.sortingOrder = true;
     }
     databaseUpgrade(e) {
         let stores = e.target.result;
@@ -144,10 +144,10 @@ class GUI {
             });
             let dateFormatter = new Intl.DateTimeFormat('pt-br');
             for (let func of lista) {
-                let linha = "<td>";
-                linha += `<input type="button" title="Edit" value="#" data-id="${func.code}" />&nbsp;`;
-                linha += `<input type="button" title="Remove" value="&ndash;" data-id="${func.code}" />`;
-                linha += `</td><td>${func.name}</td><td>${dateFormatter.format(func.birthDate)}</td><td>${numberFormatter.format(func.salary)}</td>`;
+                let linha = `<td class="align-middle">`;
+                linha += `<input type="button" title="Edit" value="#" data-id="${func.code}" class="btn btn-primary" />&nbsp;`;
+                linha += `<input type="button" title="Remove" value="&ndash;" data-id="${func.code}" class="btn btn-primary" />`;
+                linha += `</td><td class="align-middle">${func.name}</td><td class="align-middle">${dateFormatter.format(func.birthDate)}</td><td class="align-middle">${numberFormatter.format(func.salary)}</td>`;
                 let newChild = document.createElement("tr");
                 tbody.appendChild(newChild);
                 newChild.innerHTML = linha;
@@ -160,7 +160,7 @@ class GUI {
     }
     showAddWorker() {
         let tbody = document.querySelector("table#list tbody");
-        let row = `<tr><td><input type="button" title="Store" value="S" /></td><td><input type="text" name="name" /></td><td><input type="date" name="birthDate" /></td><td><input type="number" name="salary" /></td></tr>`;
+        let row = `<tr scope="row"><td><input type="button" title="Store" value="S" class="btn btn-primary" /></td><td><input type="text" name="name" class="form-control" /></td><td><input type="date" name="birthDate" class="form-control" /></td><td><input type="number" name="salary" class="form-control" /></td></tr>`;
         let th = tbody.querySelector("th[colspan]");
         tbody.innerHTML = th ? row : row + tbody.innerHTML;
         this.registerEvents();
